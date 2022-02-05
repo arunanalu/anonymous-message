@@ -11,7 +11,7 @@ const create = async (anonymousMessage) => {
   return insertedId;
 };
 
-const findMessages = async () => {
+const findApprovedMessages = async () => {
   const db = await connect();
   const messages = await db.collection(DB_COLLECTION).find({ approved: 'true' }).toArray();
   return messages;
@@ -40,7 +40,7 @@ const deleteMessage = async (id) => {
 
 module.exports = {
   create,
-  findMessages,
+  findApprovedMessages,
   findNotApprovedMessages,
   update,
   deleteMessage,

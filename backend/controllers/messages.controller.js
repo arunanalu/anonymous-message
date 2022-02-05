@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 const {
   createMessage,
-  getMessages,
+  getApprovedMessages,
   getNotApproved,
   updateMessage,
   removeMessage,
@@ -14,16 +14,16 @@ const messageCreate = async (req, res, next) => {
   try {
     await createMessage(anonymousMessage);
 
-    return res.status(created).json({ message: messageSent });
+    res.status(created).json({ message: messageSent });
   } catch (error) {
     next(error);
   }
 };
 
-const getAll = async (req, res, next) => {
+const getAllApproved = async (req, res, next) => {
   try {
-    const messages = await getMessages();
-    return res.status(success).json(messages);
+    const messages = await getApprovedMessages();
+    res.status(success).json(messages);
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ const getAll = async (req, res, next) => {
 const getNotApprovedMessages = async (req, res, next) => {
   try {
     const messages = await getNotApproved();
-    return res.status(success).json(messages);
+    res.status(success).json(messages);
   } catch (error) {
     next(error);
   }
@@ -42,7 +42,7 @@ const updateMessageApproved = async (req, res, next) => {
   const id = req.params;
   try {
     await updateMessage(id);
-    return res.status(success).json({ message: approvedMessage });
+    res.status(success).json({ message: approvedMessage });
   } catch (error) {
     next(error);
   }
@@ -52,7 +52,7 @@ const messageDelete = async (req, res, next) => {
   const { id } = req.params;
   try {
     await removeMessage(id);
-    return res.status(success).json({ message: messageDeleted });
+    res.status(success).json({ message: messageDeleted });
   } catch (error) {
     next(error);
   }
@@ -60,7 +60,7 @@ const messageDelete = async (req, res, next) => {
 
 module.exports = {
   messageCreate,
-  getAll,
+  getAllApproved,
   getNotApprovedMessages,
   updateMessageApproved,
   messageDelete,

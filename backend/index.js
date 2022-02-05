@@ -8,6 +8,7 @@ const { errorMiddleware } = require('./middlewares/errorMiddleware');
 const { individualMessagesRoute } = require('./routes/individualMessages');
 const { messagesRoute } = require('./routes/messages');
 const { usersRoute } = require('./routes/users');
+const { loginRoute } = require('./routes/login');
 
 const { PORT } = process.env;
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/messages', messagesRoute);
 app.use(usersRoute);
 app.use(individualMessagesRoute);
+app.use(loginRoute);
 
 app.get('/', (req, res) => res.send('App is working!'));
 
