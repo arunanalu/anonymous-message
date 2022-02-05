@@ -17,7 +17,14 @@ const findMessages = async () => {
   return messages;
 };
 
+const findNotApprovedMessages = async () => {
+  const db = await connect();
+  const messages = await db.collection(DB_COLLECTION).find({ approved: 'false' }).toArray();
+  return messages;
+};
+
 module.exports = {
   create,
   findMessages,
+  findNotApprovedMessages,
 };
