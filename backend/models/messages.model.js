@@ -23,8 +23,20 @@ const findNotApprovedMessages = async () => {
   return messages;
 };
 
+const update = async (id) => {
+  const db = await connect();
+  const { modifiedCount } = await db.collection(DB_COLLECTION)
+    .updateOne({ _id: ObjectId(id) }, {
+      $set: {
+        approved: 'true',
+      },
+    });
+  return modifiedCount;
+};
+
 module.exports = {
   create,
   findMessages,
   findNotApprovedMessages,
+  update,
 };
