@@ -1,4 +1,6 @@
 module.exports = {
+  invalidMessage: 'The message format is invalid.',
+  badMessage: 'The message contains unautorized words. Make sure that is not happen.',
   invalidEntry: 'Invalid entries. Try again.',
   emailAlreadyRegistered: 'Email already registered',
   incorrectData: 'Incorrect username or password',
