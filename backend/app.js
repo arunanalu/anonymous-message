@@ -14,7 +14,7 @@ const { PORT } = process.env;
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(messagesRoute);
+app.use('/messages', messagesRoute);
 app.use(usersRoute);
 app.use(individualMessagesRoute);
 
