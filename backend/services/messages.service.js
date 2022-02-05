@@ -3,9 +3,10 @@ const {
   findMessages,
   findNotApprovedMessages,
   update,
+  deleteMessage,
 } = require('../models/messages.model');
-const { messageNotFound } = require('../utils/dictionary/messagesDefault');
-const { notFound } = require('../utils/dictionary/statusCode');
+const { messageNotFound, messageNotDeleted } = require('../utils/dictionary/messagesDefault');
+const { notFound, badRequest } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorConstructor');
 
 const createMessage = async (anonymousMessage) => {
@@ -24,9 +25,13 @@ const getNotApproved = async () => {
 };
 
 const updateMessage = async (id) => {
-  const response = await update(id);
+  // da pra validar se foi mesmo modificada com o retorno da mensagem
+  await update(id);
+};
 
-  if (response === 0) throw errorConstructor(notFound, messageNotFound);
+const removeMessage = async (id) => {
+  // da pra validar se foi mesmo deletada com o retorno da mensagem
+  await deleteMessage(id);
 };
 
 module.exports = {
@@ -34,4 +39,5 @@ module.exports = {
   getMessages,
   getNotApproved,
   updateMessage,
+  removeMessage,
 };
