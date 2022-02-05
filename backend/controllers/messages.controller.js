@@ -1,8 +1,7 @@
-const { createMessage } = require('../services/messages.service');
+const { createMessage, getMessages } = require('../services/messages.service');
 const { messageSent } = require('../utils/dictionary/messagesDefault');
-const { created } = require('../utils/dictionary/statusCode');
+const { created, success } = require('../utils/dictionary/statusCode');
 
-// eslint-disable-next-line consistent-return
 const messageCreate = async (req, res, next) => {
   const anonymousMessage = req.body;
   try {
@@ -14,6 +13,16 @@ const messageCreate = async (req, res, next) => {
   }
 };
 
+const getAll = async (req, res, next) => {
+  try {
+    const messages = await getMessages();
+    return res.status(success).json(messages);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   messageCreate,
+  getAll,
 };
