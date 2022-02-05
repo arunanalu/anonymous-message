@@ -50,10 +50,22 @@ const loginValidation = async (name, password) => {
   return user;
 };
 
+const authorizationValidate = (auth) => {
+  const isValidAuth = joi.string().required();
+  const { error } = isValidAuth.validate(auth);
+  if (error) throw errHandle(status.unauthorized, errMsg.missingAuth);
+};
+
+const tokenValidation = (token) => {
+  if (!token) throw errHandle(status.unauthorized, errMsg.jwtMalformed);
+};
+
 module.exports = {
   messageValidation,
   messageOk,
   userEntriesValidation,
   userAlreadyExists,
   loginValidation,
+  authorizationValidate,
+  tokenValidation,
 };
