@@ -1,4 +1,8 @@
-const { create, findMessages } = require('../models/messages.model');
+const {
+  create,
+  findMessages,
+  findNotApprovedMessages,
+} = require('../models/messages.model');
 
 const createMessage = async (anonymousMessage) => {
   const id = await create(anonymousMessage);
@@ -10,7 +14,13 @@ const getMessages = async () => {
   return messages;
 };
 
+const getNotApproved = async () => {
+  const messages = await findNotApprovedMessages();
+  return messages;
+};
+
 module.exports = {
   createMessage,
   getMessages,
+  getNotApproved,
 };
