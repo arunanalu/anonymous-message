@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 const { loginService } = require('../services/login');
-const { createToken } = require('../services/authService');
 const { success } = require('../utils/dictionary/statusCode');
 
 const loginController = async (req, res, next) => {
@@ -9,11 +8,7 @@ const loginController = async (req, res, next) => {
 
     const user = await loginService(name, password);
 
-    const token = await createToken(user);
-
-    console.log('controller', token);
-
-    res.status(success).json({ token });
+    res.status(success).json(user);
   } catch (error) {
     console.log('erro:', error);
     next(error);

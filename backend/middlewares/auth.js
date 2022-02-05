@@ -11,6 +11,8 @@ module.exports = (req, res, next) => {
 
     const data = verifyToken(authorization);
 
+    console.log(data);
+
     if (!data) res.status(unauthorized).json(jwtMalformed);
 
     req.user = data;
