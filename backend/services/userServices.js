@@ -1,6 +1,9 @@
 const { createUser, findUser, users } = require('../models/userModels');
+const { userEntriesValidation } = require('../utils/functions/Validations');
 
 const createNewUser = async (name, password, type) => {
+  await userEntriesValidation(name, password, type);
+
   const result = await createUser(name, password, type);
   return result;
 };
