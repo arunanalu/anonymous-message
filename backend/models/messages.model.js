@@ -13,7 +13,7 @@ const create = async (anonymousMessage) => {
 
 const findMessages = async () => {
   const db = await connect();
-  const messages = await db.collection(DB_COLLECTION).find().toArray();
+  const messages = await db.collection(DB_COLLECTION).find({ approved: 'true' }).toArray();
   return messages;
 };
 

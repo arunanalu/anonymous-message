@@ -1,12 +1,12 @@
 module.exports = [{
-  message: 'Olá mundo',
+  message: 'Nunca mais é tempo demais, baby, o tempo é rei',
   approved: 'false',
 },
 {
-  message: 'Hello world',
+  message: 'Rosas são vermelhas, violetas são azuis',
   approved: 'false',
 },
 {
-  message: 'Bora mandar mensagem anônima',
+  message: 'Mandar mensagem é legal',
   approved: 'true',
 }];

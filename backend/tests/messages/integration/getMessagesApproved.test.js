@@ -6,7 +6,7 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const app = require('../../../app');
+const app = require('../../..');
 const messages = require('../../utils/messages');
 
 chai.use(chaiHttp);
@@ -56,6 +56,10 @@ describe('GET /messages', () => {
 
     it('o array tem uma mensagem', () => {
       expect(response.body).to.be.length(1);
+    });
+
+    it('a mensagem é "Mandar mensagem é legal"', () => {
+      expect(response.body[0].message).to.be.equal('Mandar mensagem é legal');
     });
   });
 });
