@@ -1,4 +1,6 @@
+
 /* eslint-disable no-console */
+
 const mongodb = require('mongodb').MongoClient;
 
 const { MONGODB_URI } = process.env;
@@ -10,6 +12,7 @@ const connect = () => mongodb.connect(MONGODB_URI, {
 })
   .then((connection) => connection.db(DB_NAME))
   .catch((err) => {
+    // eslint-disable-next-line no-console
     console.error(err);
     process.exit(1);
   });
