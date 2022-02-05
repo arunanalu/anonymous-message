@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 const { findUser } = require('../models/userModels');
 // const { loginModel } = require('../models/login');
 const { allFields, incorrectData } = require('../utils/dictionary/messagesDefault');
@@ -21,7 +21,9 @@ const loginService = async (name, password) => {
 
   if (!user) throw errorConstructor(unauthorized, incorrectData);
 
-  const token = await createToken(user);
+  const { password: _password, ...userWithoutPassword } = user;
+
+  const token = await createToken(userWithoutPassword);
 
   console.log('service', user, token);
 
