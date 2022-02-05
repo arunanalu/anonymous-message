@@ -20,7 +20,7 @@ const messageValidation = (message) => {
 
 const userAlreadyExists = async (name) => {
   const user = await findUser(name);
-  if (user) throw errHandle(status.conflict, errMsg.userExists);
+  return user;
 };
 
 const userEntriesValidation = async (name, password, type) => {
@@ -32,7 +32,22 @@ const userEntriesValidation = async (name, password, type) => {
   const { error } = userSchema.validate({ name, password, type });
   if (error) throw errHandle(status.badRequest, errMsg.invalidEntry);
 
-  await userAlreadyExists(name);
+  const user = await userAlreadyExists(name);
+  if (user) throw errHandle(status.conflict, errMsg.userExists);
+};
+
+const loginValidation = async (name, password) => {
+  const loginSchema = joi.object({
+    name: joi.string().required(),
+    password: joi.string().length(6).required(),
+  });
+  const { error } = loginSchema.validate({ name, password });
+  if (error) throw errHandle(status.badRequest, errMsg.invalidEntry);
+
+  const user = await userAlreadyExists(name);
+  if (!user) throw errHandle(status.unauthorized, errMsg.incorrectData);
+
+  return user;
 };
 
 module.exports = {
@@ -40,4 +55,5 @@ module.exports = {
   messageOk,
   userEntriesValidation,
   userAlreadyExists,
+  loginValidation,
 };
