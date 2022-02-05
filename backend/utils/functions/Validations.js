@@ -60,6 +60,10 @@ const tokenValidation = (token) => {
   if (!token) throw errHandle(status.unauthorized, errMsg.jwtMalformed);
 };
 
+const messagesEmpty = (msg) => {
+  if (msg.length === 0) throw errHandle(status.notFound, errMsg.noMessages);
+};
+
 module.exports = {
   messageValidation,
   messageOk,
@@ -68,4 +72,5 @@ module.exports = {
   loginValidation,
   authorizationValidate,
   tokenValidation,
+  messagesEmpty,
 };
