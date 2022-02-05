@@ -11,6 +11,13 @@ const create = async (anonymousMessage) => {
   return insertedId;
 };
 
+const findMessages = async () => {
+  const db = await connect();
+  const messages = await db.collection(DB_COLLECTION).find().toArray();
+  return messages;
+};
+
 module.exports = {
   create,
+  findMessages,
 };
