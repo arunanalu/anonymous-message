@@ -2,8 +2,9 @@ const {
   createMessage,
   getMessages,
   getNotApproved,
+  updateMessage,
 } = require('../services/messages.service');
-const { messageSent } = require('../utils/dictionary/messagesDefault');
+const { messageSent, approvedMessage } = require('../utils/dictionary/messagesDefault');
 const { created, success } = require('../utils/dictionary/statusCode');
 
 const messageCreate = async (req, res, next) => {
@@ -35,8 +36,19 @@ const getNotApprovedMessages = async (req, res, next) => {
   }
 };
 
+const updateMessageApproved = async (req, res, next) => {
+  const id = req.params;
+  try {
+    await updateMessage(id);
+    return res.status(success).json({ message: approvedMessage });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   messageCreate,
   getAll,
   getNotApprovedMessages,
+  updateMessageApproved,
 };
