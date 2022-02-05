@@ -25,13 +25,17 @@ const findNotApprovedMessages = async () => {
 
 const update = async (id) => {
   const db = await connect();
-  const { modifiedCount } = await db.collection(DB_COLLECTION)
+  await db.collection(DB_COLLECTION)
     .updateOne({ _id: ObjectId(id) }, {
       $set: {
         approved: 'true',
       },
     });
-  return modifiedCount;
+};
+
+const deleteMessage = async (id) => {
+  const db = await connect();
+  await db.collection(DB_COLLECTION).deleteOne({ _id: ObjectId(id) });
 };
 
 module.exports = {
@@ -39,4 +43,5 @@ module.exports = {
   findMessages,
   findNotApprovedMessages,
   update,
+  deleteMessage,
 };
