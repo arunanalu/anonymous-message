@@ -2,7 +2,11 @@ const {
   create,
   findMessages,
   findNotApprovedMessages,
+  update,
 } = require('../models/messages.model');
+const { messageNotFound } = require('../utils/dictionary/messagesDefault');
+const { notFound } = require('../utils/dictionary/statusCode');
+const errorConstructor = require('../utils/functions/errorConstructor');
 
 const createMessage = async (anonymousMessage) => {
   const id = await create(anonymousMessage);
@@ -19,8 +23,15 @@ const getNotApproved = async () => {
   return messages;
 };
 
+const updateMessage = async (id) => {
+  const response = await update(id);
+
+  if (response === 0) throw errorConstructor(notFound, messageNotFound);
+};
+
 module.exports = {
   createMessage,
   getMessages,
   getNotApproved,
+  updateMessage,
 };
