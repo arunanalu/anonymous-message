@@ -1,21 +1,18 @@
 const {
   create,
-  findMessages,
+  findApprovedMessages,
   findNotApprovedMessages,
   update,
   deleteMessage,
 } = require('../models/messages.model');
-const { messageNotFound, messageNotDeleted } = require('../utils/dictionary/messagesDefault');
-const { notFound, badRequest } = require('../utils/dictionary/statusCode');
-const errorConstructor = require('../utils/functions/errorConstructor');
 
 const createMessage = async (anonymousMessage) => {
   const id = await create(anonymousMessage);
   return id;
 };
 
-const getMessages = async () => {
-  const messages = await findMessages();
+const getApprovedMessages = async () => {
+  const messages = await findApprovedMessages();
   return messages;
 };
 
@@ -36,7 +33,7 @@ const removeMessage = async (id) => {
 
 module.exports = {
   createMessage,
-  getMessages,
+  getApprovedMessages,
   getNotApproved,
   updateMessage,
   removeMessage,

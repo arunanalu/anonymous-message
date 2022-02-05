@@ -1,4 +1,3 @@
-
 /* eslint-disable no-console */
 
 const mongodb = require('mongodb').MongoClient;
