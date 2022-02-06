@@ -12,7 +12,7 @@ const messageOk = (message) => {
 };
 
 const messageValidation = (message) => {
-  const messageSchema = joi.string().min(2).max(100).required();
+  const messageSchema = joi.string().min(5).max(288).required();
   const { error } = messageSchema.validate(message);
   if (error) throw errHandle(status.badRequest, errMsg.invalidMessage);
   messageOk(message);

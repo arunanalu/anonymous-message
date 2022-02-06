@@ -1,7 +1,7 @@
 const Router = require('express');
 const {
   messageCreate,
-  getAll,
+  getAllApproved,
   getNotApprovedMessages,
   updateMessageApproved,
   messageDelete,
@@ -10,7 +10,7 @@ const {
 const messagesRoute = new Router();
 
 messagesRoute.post('/', messageCreate);
-messagesRoute.get('/', getAll);
+messagesRoute.get('/', getAllApproved);
 messagesRoute.get('/approve', getNotApprovedMessages);
 messagesRoute.put('/approve/:id', updateMessageApproved);
 messagesRoute.delete('/approve/:id', messageDelete);

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "pm2-runtime start ecosystem.config.yml",
+    "start:dev": "pm2-runtime start index.js --watch",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +18,8 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "eslint": "^8.8.0",

@@ -1,6 +1,6 @@
 const {
   create,
-  findMessages,
+  findApprovedMessages,
   findNotApprovedMessages,
   update,
   deleteMessage,
@@ -15,8 +15,8 @@ const createMessage = async (anonymousMessage) => {
   return id;
 };
 
-const getMessages = async () => {
-  const messages = await findMessages();
+const getApprovedMessages = async () => {
+  const messages = await findApprovedMessages();
   messagesEmpty(messages);
   return messages;
 };
@@ -39,7 +39,7 @@ const removeMessage = async (id) => {
 
 module.exports = {
   createMessage,
-  getMessages,
+  getApprovedMessages,
   getNotApproved,
   updateMessage,
   removeMessage,
