@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext();
 
@@ -12,5 +12,5 @@ export function UserWrapper({ children }) {
 }
 
 export function useUserContext() {
-  return useUserContext(UserContext);
+  return useContext(UserContext);
 }

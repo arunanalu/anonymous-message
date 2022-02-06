@@ -2,11 +2,15 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
+import { useUserContext } from "../contexts/userContext";
 import CenteredModal from "./CenteredModal";
+import LoginMessage from "./LoginMessage";
 
 function LoginModal({ open, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { token, setToken } = useUserContext();
+  const [message, setMessage] = useState("");
 
   const emailRegex = /\S+@\S+\.\S+/;
   console.log(process.env.API);
@@ -21,20 +25,25 @@ function LoginModal({ open, onClose }) {
         type: "user",
       },
     });
-    console.log(createResponse);
+    // setMessage(createResponse.)
   };
 
   const logIn = async () => {
-    const loginResponse = await axios({
-      method: "post",
-      url: `${process.env.API}/login`,
-      data: {
-        name: email,
-        password
-      },
-    });
-    console.log(loginResponse);
-  }
+    try {
+      const loginResponse = await axios({
+        method: "post",
+        url: `${process.env.API}/login`,
+        data: {
+          name: email,
+          password,
+        },
+      });
+      if(loginResponse.data.token) return onClose();
+    } catch(err) {
+      console.log(err);
+      setMessage('Credenciais incorretas')
+    }
+  };
 
   return (
     <CenteredModal open={open} onClose={onClose}>
@@ -59,11 +68,16 @@ function LoginModal({ open, onClose }) {
           <Button variant="contained" sx={{ width: 130 }} onClick={logIn}>
             ENTRAR
           </Button>
-          <Button variant="contained" sx={{ width: 130 }} onClick={createAccount}>
+          <Button
+            variant="contained"
+            sx={{ width: 130 }}
+            onClick={createAccount}
+          >
             CADASTRAR
           </Button>
         </Box>
       </Box>
+      <LoginMessage message={message} />
     </CenteredModal>
   );
 }

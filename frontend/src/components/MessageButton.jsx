@@ -4,7 +4,7 @@ import React from "react";
 function MessageButton({ handleSend }) {
   return (
     <Button variant="contained" onClick={handleSend}>
-      Ecrever Mensagem
+      Escrever Mensagem
     </Button>
   );
 }
