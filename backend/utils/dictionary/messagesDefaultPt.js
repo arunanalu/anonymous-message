@@ -15,4 +15,5 @@ module.exports = {
   missingAuth: 'Está faltando o token de autenticação',
   onlyAdmins: 'Apenas admins',
   onlyUser: 'Essa rota suporta apenas o registro de usuários comuns',
+  notCorrectUser: 'Você não pode acessar as mensagens de outros usuários',
 };
