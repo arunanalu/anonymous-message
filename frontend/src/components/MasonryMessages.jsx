@@ -7,7 +7,7 @@ function MasonryMessages({ messages }) {
     <Box sx={{ width: 1000, minHeight: 500 }} alignContent='center' >
       <Masonry columns={3} sx={{margin:0, padding:3}}>
         {messages.map((message, index) => (
-          <Paper key={message} elevation={2}>{message}</Paper>
+          <Paper key={message} elevation={0} sx={{padding:2, border:2, borderColor:'#A4A4A4'}}>{message}</Paper>
         ))}
       </Masonry>
     </Box>

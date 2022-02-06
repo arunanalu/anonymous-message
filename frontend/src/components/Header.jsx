@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-import { AppBar, Box, Button, Grid, Typography } from "@mui/material";
+import { AppBar, Box, Typography } from "@mui/material";
 import LoginModal from "./LoginModal";
-import { useUserContext } from "../contexts/userContext";
 import LoginHeader from "./LoginHeader";
 function Header() {
   const [loginOpen, setLoginOpen] = useState(false);

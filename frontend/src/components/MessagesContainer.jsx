@@ -43,7 +43,7 @@ export default function BasicMasonry() {
       sx={{ display: "flex", justifyContent: "center", alignItems: "center", width:'100%' }}
     >
       <Paper elevation={0} sx={{borderRadius:10, border:2, borderColor: '#E6E6E6'}}>
-        <Typography align='center'>Explorar</Typography>
+        <Typography align='center' variant='h6' fontWeight={600}>EXPLORAR</Typography>
         <MasonryMessages messages={messages} />
         <MessagesController />
         <MessageButton handleSend={handleSend} />
