@@ -5,19 +5,25 @@ const {
   update,
   deleteMessage,
 } = require('../models/messages.model');
+const { messageValidation, messagesEmpty } = require('../utils/functions/Validations');
 
 const createMessage = async (anonymousMessage) => {
+  const { message } = anonymousMessage;
+  messageValidation(message);
+
   const id = await create(anonymousMessage);
   return id;
 };
 
 const getApprovedMessages = async () => {
   const messages = await findApprovedMessages();
+  messagesEmpty(messages);
   return messages;
 };
 
 const getNotApproved = async () => {
   const messages = await findNotApprovedMessages();
+  messagesEmpty(messages);
   return messages;
 };
 
