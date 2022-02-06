@@ -16,15 +16,22 @@ function LoginModal({ open, onClose }) {
   console.log(process.env.API);
 
   const createAccount = async () => {
-    const createResponse = await axios({
-      method: "post",
-      url: `${process.env.API}/users`,
-      data: {
-        name: email,
-        password,
-        type: "user",
-      },
-    });
+    try {
+      const createResponse = await axios({
+        method: "post",
+        url: `${process.env.API}/users`,
+        data: {
+          name: email,
+          password,
+          type: "user",
+        },
+      });
+      setMessage(response.message);
+      setTimeout(onClose,1000)
+    } catch({response}) {
+      console.log(response.data.message);
+      setMessage(response.data.message);
+    }
     // setMessage(createResponse.)
   };
 
@@ -38,10 +45,10 @@ function LoginModal({ open, onClose }) {
           password,
         },
       });
-      if(loginResponse.data.token) return onClose();
-    } catch(err) {
-      console.log(err);
-      setMessage('Credenciais incorretas')
+      setToken(loginResponse.data.token);
+      onClose();
+    } catch ({response}) {
+      setMessage(response.message);
     }
   };
 
