@@ -15,13 +15,15 @@ const { PORT } = process.env;
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use('/messages', messagesRoute);
+app.get('/', (req, res) => res.send('App is working!'));
 app.use(usersRoute);
+app.use('/messages', messagesRoute);
 app.use(individualMessagesRoute);
 app.use(loginRoute);
 
-app.get('/', (req, res) => res.send('App is working!'));
 
 app.use(errorMiddleware);
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+
+module.exports = app;

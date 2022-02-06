@@ -3,8 +3,8 @@ const { createANewUser, findAnExistingUser, getAllUsers } = require('../controll
 
 const usersRoute = new Router();
 
-usersRoute.post('/users', createANewUser);
-usersRoute.get('/users/:name', findAnExistingUser);
 usersRoute.get('/users', getAllUsers);
+usersRoute.get('/users/:name', findAnExistingUser);
+usersRoute.post('/users', createANewUser);
 
 module.exports = { usersRoute };
