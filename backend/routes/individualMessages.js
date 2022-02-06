@@ -1,5 +1,10 @@
 const Router = require('express');
 
-const individualMessagesRoute = new Router();
+const { createAnonymousMessage, getAnonymousMessages } = require('../controllers/anonymousMessage');
 
-module.exports = { individualMessagesRoute };
+const individualMessageRoute = new Router();
+
+individualMessageRoute.post('/:user', createAnonymousMessage);
+individualMessageRoute.get('/:user', getAnonymousMessages);
+
+module.exports = { individualMessageRoute };
