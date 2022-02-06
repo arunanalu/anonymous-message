@@ -13,10 +13,10 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('PUT /messages/:id', () => {
-  describe('quando a mensagem é aprovada com sucesso', () => {
+describe('DELETE /messages/:id', () => {
+  describe('quando a mensagem é deletada com sucesso', () => {
     let response;
-    let messagesApproved;
+    let messagesNotApproved;
     const DBServer = new MongoMemoryServer();
 
     before(async () => {
@@ -38,15 +38,15 @@ describe('PUT /messages/:id', () => {
         ),
       );
 
-      const messagesNotApproved = await chai.request(app)
+      const messagesGet = await chai.request(app)
         .get('/messages/approve');
-      const { _id: id } = messagesNotApproved.body[0];
+      const { _id: id } = messagesGet.body[0];
 
       response = await chai.request(app)
-        .put(`/messages/approve/${id}`);
+        .delete(`/messages/approve/${id}`);
 
-      messagesApproved = await chai.request(app)
-        .get('/messages');
+      messagesNotApproved = await chai.request(app)
+        .get('/messages/approve');
     });
 
     after(async () => {
@@ -66,12 +66,12 @@ describe('PUT /messages/:id', () => {
       expect(response.body).to.have.property('message');
     });
 
-    it('a mensagem é "This message was approved"', () => {
-      expect(response.body.message).to.be.equal('This message was approved');
+    it('a mensagem é "This message was deleted"', () => {
+      expect(response.body.message).to.be.equal('This message was deleted');
     });
 
     it('o endpoint de mensagens aprovadas, deve ter duas mensagens', async () => {
-      expect(messagesApproved.body).to.be.length(2);
+      expect(messagesNotApproved.body).to.be.length(1);
     });
   });
 });
