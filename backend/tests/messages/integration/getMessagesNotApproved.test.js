@@ -39,7 +39,6 @@ describe('GET /messages/approve', () => {
 
       response = await chai.request(app)
         .get('/messages/approve');
-        console.log(response.body)
     });
 
     after(async () => {
