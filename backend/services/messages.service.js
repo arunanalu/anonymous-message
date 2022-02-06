@@ -5,8 +5,10 @@ const {
   update,
   deleteMessage,
 } = require('../models/messages.model');
+const { messageValidation } = require('../utils/functions/Validations');
 
 const createMessage = async (anonymousMessage) => {
+  messageValidation(anonymousMessage.message);
   const id = await create(anonymousMessage);
   return id;
 };

@@ -1,0 +1,18 @@
+module.exports = {
+  messageSent: 'Sua mensagem foi enviada',
+  approvedMessage: 'Essa mensagem foi aprovada',
+  messageNotFound: 'Essa mensagem não foi achada',
+  messageNotDeleted: 'Essa mensagem não pôde ser deletada',
+  messageDeleted: 'A mensagem foi deletada',
+  invalidMessage: 'O formato da mensagem é inválido',
+  badMessage: 'A mensagem contém palavras não permitidas. Se assegure de que isto não aconteça',
+  invalidEntry: 'Dados inválidos. Tente novamente.',
+  userExists: 'Esse nome de usuário já existe',
+  incorrectData: 'Nome de usuário ou senha inválidos',
+  allFields: 'Todos os campos precisam estar preenchidos',
+  jwtMalformed: 'jwt mal formado',
+  recipeNotFound: 'Receita não encontrada',
+  missingAuth: 'Está faltando o token de autenticação',
+  onlyAdmins: 'Apenas admins',
+  onlyUser: 'Essa rota suporta apenas o registro de usuários comuns',
+};

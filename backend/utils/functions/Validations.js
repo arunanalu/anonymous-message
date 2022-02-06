@@ -1,7 +1,7 @@
 const joi = require('@hapi/joi');
 const errHandle = require('./errorConstructor');
 const status = require('../dictionary/statusCode');
-const errMsg = require('../dictionary/messagesDefault');
+const errMsg = require('../dictionary/messagesDefaultPt');
 const dontSay = require('../dictionary/invalidWords');
 const { findUser } = require('../../models/userModels');
 
