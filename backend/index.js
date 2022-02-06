@@ -5,7 +5,7 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const { errorMiddleware } = require('./middlewares/errorMiddleware');
-const { individualMessagesRoute } = require('./routes/individualMessages');
+const { individualMessageRoute } = require('./routes/individualMessages');
 const { messagesRoute } = require('./routes/messages');
 const { usersRoute } = require('./routes/users');
 const { loginRoute } = require('./routes/login');
@@ -18,7 +18,7 @@ app.use(cors());
 app.get('/', (req, res) => res.send('App is working!'));
 app.use(usersRoute);
 app.use('/messages', messagesRoute);
-app.use(individualMessagesRoute);
+app.use('/individualMessages', individualMessageRoute);
 app.use(loginRoute);
 
 app.use(errorMiddleware);
