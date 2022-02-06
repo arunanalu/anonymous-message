@@ -21,7 +21,6 @@ app.use('/messages', messagesRoute);
 app.use(individualMessagesRoute);
 app.use(loginRoute);
 
-
 app.use(errorMiddleware);
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
