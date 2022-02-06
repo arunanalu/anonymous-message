@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Paper, Typography } from "@mui/material";
 import MasonryMessages from "./MasonryMessages";
 import MessagesController from "./MessagesController";
 import MessageButton from "./MessageButton";
 import NewMessageModal from "./NewMessageModal";
+import axios from 'axios';
 
 const defaultMessages = [
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum",
@@ -18,6 +19,15 @@ const defaultMessages = [
 export default function BasicMasonry() {
   const [messages, setMessages] = useState(defaultMessages);
   const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const {data: fetched} = await axios.get('https://a347rl.deta.dev/messages')
+      const fetchedMessages = fetched.map((mes) => mes.message);
+      setMessages(fetchedMessages);
+    }
+    fetchMessages();
+  }, [])
 
   const handleSend = () => {
     setModalOpen(true);
