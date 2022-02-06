@@ -4,16 +4,16 @@ import React from "react";
 import { useUserContext } from "../contexts/userContext";
 
 function LoginHeader({ setLoginOpen }) {
-  const { user } = useUserContext();
+  const { user,setToken } = useUserContext();
 
   console.log(user);
   if (user.name)
     return (
-      <Box>
+      <div onClick={() => setToken(undefined)}>
         <Typography variant="h6" sx={{ color: "black" }}>
           {user.name}
         </Typography>
-      </Box>
+      </div>
     );
   else
     return (

@@ -8,7 +8,7 @@ export function UserWrapper({ children }) {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) return setUser({});
     const {data} = decode(token);
     setUser((state) => ({ ...state, name: data.name }));
   }, [token]);
