@@ -69,6 +69,10 @@ const onlyAdminValidations = (type) => {
   if (type !== 'admin') throw errHandle(status.unauthorized, errMsg.onlyAdmins);
 };
 
+const getPrivateMessagesValidation = (routeName, tokenName) => {
+  if (routeName !== tokenName) throw errHandle(status.unauthorized, errMsg.notCorrectUser);
+};
+
 module.exports = {
   messageValidation,
   messageOk,
@@ -79,4 +83,5 @@ module.exports = {
   tokenValidation,
   messagesEmpty,
   onlyAdminValidations,
+  getPrivateMessagesValidation,
 };

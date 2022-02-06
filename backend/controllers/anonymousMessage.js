@@ -16,7 +16,8 @@ const createAnonymousMessage = async (req, res, next) => {
 const getAnonymousMessages = async (req, res, next) => {
   try {
     const { user } = req.params;
-    const messages = await anonymousMessageServices.getAnonymousMessages(user);
+    const { name } = req.user;
+    const messages = await anonymousMessageServices.getAnonymousMessages(user, name);
     return res.status(success).json(messages);
   } catch (error) {
     return next(error);
