@@ -3,8 +3,8 @@ const { createToken } = require('./authService');
 
 const loginService = async (name, password) => {
   const user = await loginValidation(name, password);
-
-  const token = createToken(user);
+  const { password: _password, ...userWithoutPassword } = user;
+  const token = createToken(userWithoutPassword);
   const { type } = user;
 
   return { token, type };

@@ -8,10 +8,11 @@ module.exports = {
   invalidMessage: 'The message format is invalid.',
   badMessage: 'The message contains unautorized words. Make sure that is not happen.',
   invalidEntry: 'Invalid entries. Try again.',
-  userExists: 'That ussername is already registered',
+  userExists: 'That username is already registered',
   incorrectData: 'Incorrect username or password',
   allFields: 'All fields must be filled',
   jwtMalformed: 'jwt malformed',
   missingAuth: 'missing auth token',
   onlyAdmins: 'Only admins can register new admins',
+  onlyUser: 'This route only supports register normal users',
 };

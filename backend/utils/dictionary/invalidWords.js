@@ -1,3 +1,3 @@
 module.exports = [
-  'cu', 'puta', 'vsf', 'vtc', 'fdp', 'filho da puta', 'caralho', 'porra', 'puta que pariu',
+  'cu', 'puta', 'vsf', 'vtc', 'fdp', 'caralho', 'porra', 'pariu', 'fuder', 'corno',
 ];

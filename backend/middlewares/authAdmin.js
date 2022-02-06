@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const { verifyToken } = require('../services/authService');
-const { authorizationValidate, tokenValidation } = require('../utils/functions/Validations');
+const { authorizationValidate, tokenValidation, onlyAdminValidations } = require('../utils/functions/Validations');
 
 module.exports = (req, res, next) => {
   try {
@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
     const data = verifyToken(authorization);
 
     tokenValidation(data);
+    onlyAdminValidations(data.type);
 
     req.user = data;
 

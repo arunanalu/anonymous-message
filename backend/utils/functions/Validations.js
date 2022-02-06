@@ -1,7 +1,7 @@
 const joi = require('@hapi/joi');
 const errHandle = require('./errorConstructor');
 const status = require('../dictionary/statusCode');
-const errMsg = require('../dictionary/messagesDefault');
+const errMsg = require('../dictionary/messagesDefaultPt');
 const dontSay = require('../dictionary/invalidWords');
 const { findUser } = require('../../models/userModels');
 
@@ -31,6 +31,7 @@ const userEntriesValidation = async (name, password, type) => {
   });
   const { error } = userSchema.validate({ name, password, type });
   if (error) throw errHandle(status.badRequest, errMsg.invalidEntry);
+  if (type !== 'user') throw errHandle(status.badRequest, errMsg.onlyUser);
 
   const user = await userAlreadyExists(name);
   if (user) throw errHandle(status.conflict, errMsg.userExists);
@@ -64,6 +65,10 @@ const messagesEmpty = (msg) => {
   if (msg.length === 0) throw errHandle(status.notFound, errMsg.noMessages);
 };
 
+const onlyAdminValidations = (type) => {
+  if (type !== 'admin') throw errHandle(status.unauthorized, errMsg.onlyAdmins);
+};
+
 module.exports = {
   messageValidation,
   messageOk,
@@ -73,4 +78,5 @@ module.exports = {
   authorizationValidate,
   tokenValidation,
   messagesEmpty,
+  onlyAdminValidations,
 };
