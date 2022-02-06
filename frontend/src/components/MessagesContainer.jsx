@@ -1,9 +1,9 @@
-import Box from "@mui/material/Box";
-import Masonry from "@mui/lab/Masonry";
 import { useState } from "react";
-import { Paper, Typography } from "@mui/material";
+import { Modal, Paper, Typography } from "@mui/material";
 import MasonryMessages from "./MasonryMessages";
 import MessagesController from "./MessagesController";
+import MessageButton from "./MessageButton";
+import NewMessageModal from "./NewMessageModal";
 
 const defaultMessages = [
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum",
@@ -17,11 +17,19 @@ const defaultMessages = [
 
 export default function BasicMasonry() {
   const [messages, setMessages] = useState(defaultMessages);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleSend = () => {
+    setModalOpen(true);
+  };
+
   return (
     <Paper>
       <Typography>Explorar</Typography>
       <MasonryMessages messages={messages} />
       <MessagesController />
+      <MessageButton handleSend={handleSend} />
+      <NewMessageModal open={modalOpen} onClose={() => setModalOpen(false)}/>
     </Paper>
   );
 }
