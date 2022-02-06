@@ -12,7 +12,6 @@ const messageCreate = async (req, res, next) => {
   const anonymousMessage = req.body;
   try {
     await createMessage(anonymousMessage);
-
     res.status(created).json({ message: messageSent });
   } catch (error) {
     next(error);

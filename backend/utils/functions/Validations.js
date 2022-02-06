@@ -31,6 +31,7 @@ const userEntriesValidation = async (name, password, type) => {
   });
   const { error } = userSchema.validate({ name, password, type });
   if (error) throw errHandle(status.badRequest, errMsg.invalidEntry);
+  if (type !== 'user') throw errHandle(status.badRequest, errMsg.onlyUser);
 
   await userAlreadyExists(name);
 };

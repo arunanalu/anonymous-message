@@ -25,7 +25,7 @@ const loginService = async (name, password) => {
 
   const token = await createToken(userWithoutPassword);
 
-  console.log('service', user, token);
+  // console.log('service', user, token);
 
   const { type } = user;
 

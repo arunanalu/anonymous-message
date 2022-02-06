@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const { verifyToken } = require('../services/authService');
-const { missingAuth, jwtMalformed } = require('../utils/dictionary/messagesDefault');
+const { missingAuth, jwtMalformed, onlyAdmins } = require('../utils/dictionary/messagesDefault');
 const { unauthorized } = require('../utils/dictionary/statusCode');
 
 module.exports = (req, res, next) => {
@@ -15,6 +15,8 @@ module.exports = (req, res, next) => {
 
     // console.log(data, 'aqui está o data');
     // console.log(data.type, 'aqui está o tipo');
+
+    if (data.type !== 'admin') res.status(unauthorized).json(onlyAdmins);
 
     req.user = data;
 
