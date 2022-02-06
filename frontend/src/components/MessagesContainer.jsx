@@ -6,7 +6,7 @@ import MessageButton from "./MessageButton";
 import NewMessageModal from "./NewMessageModal";
 import axios from "axios";
 import LoginModal from "./LoginModal";
-import { Box } from "@mui/system";
+import { Box, flexbox } from "@mui/system";
 
 const defaultMessages = [
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum",
@@ -40,13 +40,33 @@ export default function BasicMasonry() {
   return (
     <Box
       container
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center", width:'100%' }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+      }}
     >
-      <Paper elevation={0} sx={{borderRadius:10, border:2, borderColor: '#E6E6E6'}}>
-        <Typography align='center' variant='h6' fontWeight={600}>EXPLORAR</Typography>
+      <Paper
+        elevation={0}
+        sx={{ borderRadius: 10, border: 2, borderColor: "#E6E6E6" }}
+      >
+        <Typography align="center" variant="h6" fontWeight={600}>
+          EXPLORAR
+        </Typography>
         <MasonryMessages messages={messages} />
-        <MessagesController />
-        <MessageButton handleSend={handleSend} />
+        <Box
+          container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <MessagesController />
+          <MessageButton handleSend={handleSend} />
+        </Box>
         <NewMessageModal
           open={messageOpen}
           onClose={() => setMessageOpen(false)}

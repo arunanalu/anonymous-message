@@ -17,7 +17,7 @@ function MessagesController() {
   }
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+    <Box sx={{ display: "flex", alignItems: "center" }}>
       <IconButton
         aria-label="previous"
         onClick={prevPage}
