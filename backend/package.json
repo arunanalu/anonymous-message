@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "mocha ./tests/**/*$NAME*.test.js --exit",
-    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "lint": "eslint --no-inline-config --ext .js,.jsx --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "start": "pm2-runtime start ecosystem.config.yml",
+    "start:dev": "pm2-runtime start index.js --watch"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +19,8 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "chai": "^4.3.6",
