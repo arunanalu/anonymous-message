@@ -25,7 +25,7 @@ export default function BasicMasonry() {
   useEffect(() => {
     const fetchMessages = async () => {
       const { data: fetched } = await axios.get(
-        "https://a347rl.deta.dev/messages"
+        "https://a347rl.deta.dev/messages/approve"
       );
       const fetchedMessages = fetched.map((mes) => mes.message);
       setMessages(fetchedMessages);
