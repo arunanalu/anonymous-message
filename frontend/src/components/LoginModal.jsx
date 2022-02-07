@@ -9,6 +9,7 @@ import LoginMessage from "./LoginMessage";
 function LoginModal({ open, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { setToken } = useUserContext();
   const [message, setMessage] = useState("");
 
@@ -17,6 +18,7 @@ function LoginModal({ open, onClose }) {
 
   const createAccount = async () => {
     try {
+      setIsLoading(true);
       const createResponse = await axios({
         method: "post",
         url: `${process.env.API}/users`,
@@ -26,15 +28,17 @@ function LoginModal({ open, onClose }) {
           type: "user",
         },
       });
+      setIsLoading(false);
       setTimeout(onClose,1000)
     } catch({response}) {
+      setIsLoading(false);
       setMessage(response.data.message);
     }
-    // setMessage(createResponse.)
   };
 
   const logIn = async () => {
     try {
+      setIsLoading(true);
       const loginResponse = await axios({
         method: "post",
         url: `${process.env.API}/login`,
@@ -44,8 +48,10 @@ function LoginModal({ open, onClose }) {
         },
       });
       setToken(loginResponse.data.token);
+      setIsLoading(false);
       onClose();
     } catch ({response}) {
+      setIsLoading(false);
       setMessage(response.data.message);
     }
   };
@@ -82,7 +88,7 @@ function LoginModal({ open, onClose }) {
           </Button>
         </Box>
       </Box>
-      <LoginMessage message={message} />
+      <LoginMessage message={message} loading={isLoading}/>
     </CenteredModal>
   );
 }

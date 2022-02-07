@@ -21,9 +21,7 @@ function MessagesController() {
       <IconButton aria-label="previous" onClick={prevPage}>
         <SkipPreviousIcon />
       </IconButton>
-      <Typography>
-        {page}/{maxPages}
-      </Typography>
+      <Typography>{page}</Typography>
 
       <IconButton aria-label="next" onClick={nextPage}>
         <SkipNextIcon />
