@@ -4,17 +4,16 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useUserContext } from "../contexts/userContext";
 import CenteredModal from "./CenteredModal";
-import LoginMessage from "./LoginMessage";
+import RequestMessage from "./RequestMessage";
 
 function LoginModal({ open, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { setToken } = useUserContext();
+  const { setUser } = useUserContext();
   const [message, setMessage] = useState("");
 
   const emailRegex = /\S+@\S+\.\S+/;
-  console.log(process.env.API);
 
   const createAccount = async () => {
     try {
@@ -47,7 +46,8 @@ function LoginModal({ open, onClose }) {
           password,
         },
       });
-      setToken(loginResponse.data.token);
+      const {token, type} = loginResponse.data;
+      setUser({token, type});
       setIsLoading(false);
       onClose();
     } catch ({response}) {
@@ -88,7 +88,7 @@ function LoginModal({ open, onClose }) {
           </Button>
         </Box>
       </Box>
-      <LoginMessage message={message} loading={isLoading}/>
+      <RequestMessage message={message} loading={isLoading}/>
     </CenteredModal>
   );
 }

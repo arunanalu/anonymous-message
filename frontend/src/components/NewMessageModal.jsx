@@ -2,13 +2,17 @@ import { Button, Modal, Paper, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import CenteredModal from "./CenteredModal";
+import RequestMessage from "./RequestMessage";
 
 function NewMessageModal({ open, onClose }) {
   const [message, setMessage] = useState("");
+  const [requestMessage, setRequestMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSendMessage = async () => {
     try {
-      const messageResponse = await axios({
+      setIsLoading(true);
+      await axios({
         method: "post",
         url: `${process.env.API}/messages`,
         data: {
@@ -16,12 +20,13 @@ function NewMessageModal({ open, onClose }) {
           approved: "false",
         },
       });
-      console.log(messageResponse);
-    } catch (err) {
-      console.log(err);
+      setIsLoading(false);
+      setMessage("");
+      return onClose();
+    } catch ({ response }) {
+      setIsLoading(false);
+      setRequestMessage(response.data.message);
     }
-    setMessage("");
-    return onClose();
   };
 
   return (
@@ -38,6 +43,7 @@ function NewMessageModal({ open, onClose }) {
       <Button variant="contained" onClick={handleSendMessage}>
         Enviar
       </Button>
+      <RequestMessage loading={isLoading} message={requestMessage} />
     </CenteredModal>
   );
 }

@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 
-function LoginMessage({ message, loading }) {
+function RequestMessage({ message, loading }) {
   if (loading) return <Box>Loading</Box>;
   if (message)
     return (
@@ -25,4 +25,4 @@ function LoginMessage({ message, loading }) {
   return <div></div>;
 }
 
-export default LoginMessage;
+export default RequestMessage;

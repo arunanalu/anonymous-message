@@ -23,6 +23,7 @@ export default function BasicMasonry() {
 
   useEffect(() => {
     const fetchMessages = async () => {
+      console.log('fetch');
       const { data: fetched } = await axios.get(
         "https://a347rl.deta.dev/messages/approve"
       );

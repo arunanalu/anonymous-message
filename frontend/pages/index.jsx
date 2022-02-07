@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
-import MessagesContainer from '../src/components/MessagesContainer';
+import MessagesContainer from "../src/components/MessagesContainer";
 
-import useStyles from "../src/styles/HomePage.styles";
 import Header from "../src/components/Header";
-
+import { useUserContext } from "../src/contexts/userContext";
+import AdmMessagesContainer from "../src/components/adminMain/AdmMessagesContainer";
 
 const Index = () => {
-  const classes = useStyles();
+  const { user } = useUserContext();
+
+  if (user.type === 'admin')
+    return (
+      <Grid container>
+        <Header />
+        <AdmMessagesContainer />
+      </Grid>
+    );
 
   return (
     <Grid container>
