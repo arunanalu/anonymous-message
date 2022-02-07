@@ -9,7 +9,7 @@ import LoginMessage from "./LoginMessage";
 function LoginModal({ open, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { token, setToken } = useUserContext();
+  const { setToken } = useUserContext();
   const [message, setMessage] = useState("");
 
   const emailRegex = /\S+@\S+\.\S+/;
@@ -26,10 +26,8 @@ function LoginModal({ open, onClose }) {
           type: "user",
         },
       });
-      setMessage(response.message);
       setTimeout(onClose,1000)
     } catch({response}) {
-      console.log(response.data.message);
       setMessage(response.data.message);
     }
     // setMessage(createResponse.)
@@ -48,7 +46,7 @@ function LoginModal({ open, onClose }) {
       setToken(loginResponse.data.token);
       onClose();
     } catch ({response}) {
-      setMessage(response.message);
+      setMessage(response.data.message);
     }
   };
 

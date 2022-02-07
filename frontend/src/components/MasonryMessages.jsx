@@ -8,7 +8,7 @@ function MasonryMessages({ messages }) {
       <Masonry columns={3} spacing={3}>
         {messages.map((message, index) => (
           <Paper
-            key={message}
+            key={index}
             elevation={0}
             sx={{ padding: 2, border: 2, borderColor: "#A4A4A4" }}
           >

@@ -13,7 +13,7 @@ function NewMessageModal({ open, onClose }) {
         url: `${process.env.API}/messages`,
         data: {
           message,
-          approved: false,
+          approved: "false",
         },
       });
       console.log(messageResponse);
