@@ -7,13 +7,13 @@ import CenteredModal from "./CenteredModal";
 import RequestMessage from "./RequestMessage";
 
 function LoginModal({ open, onClose }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useUserContext();
   const [message, setMessage] = useState("");
 
-  const emailRegex = /\S+@\S+\.\S+/;
+  // const usernameRegex = /\S+@\S+\.\S+/;
 
   const createAccount = async () => {
     try {
@@ -22,7 +22,7 @@ function LoginModal({ open, onClose }) {
         method: "post",
         url: `${process.env.API}/users`,
         data: {
-          name: email,
+          name: username,
           password,
           type: "user",
         },
@@ -42,12 +42,12 @@ function LoginModal({ open, onClose }) {
         method: "post",
         url: `${process.env.API}/login`,
         data: {
-          name: email,
+          name: username,
           password,
         },
       });
       const {token, type} = loginResponse.data;
-      setUser({token, type});
+      setUser({token, type, name: username });
       setIsLoading(false);
       onClose();
     } catch ({response}) {
@@ -61,12 +61,11 @@ function LoginModal({ open, onClose }) {
       <Typography variant="h2">LogoApp</Typography>
       <Box component="form" sx={{ display: "flex", flexDirection: "column" }}>
         <TextField
-          error={!emailRegex.test(email) && email !== ""}
-          label="Email"
+          label="username"
           variant="outlined"
           sx={{ width: 300 }}
-          value={email}
-          onChange={(evt) => setEmail(evt.target.value)}
+          value={username}
+          onChange={(evt) => setUsername(evt.target.value)}
         />
         <TextField
           label="Senha"

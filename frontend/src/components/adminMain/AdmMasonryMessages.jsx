@@ -11,7 +11,7 @@ import { useUserContext } from "../../contexts/userContext";
 function AdmMasonryMessages({ messages }) {
   const classes = useMasonryStyles();
   const { user } = useUserContext();
-  const handleApprove = async (message) => {
+  const handleReprove = async (message) => {
     try {
       const sendResponse = await axios({
         url: `${process.env.API}/messages/approve/${message._id}`,
@@ -25,6 +25,21 @@ function AdmMasonryMessages({ messages }) {
       console.log(response);
     }
   };
+
+  const handleApprove = async (message) => {
+    try {
+      const sendResponse = await axios({
+        url: `${process.env.API}/messages/approve/${message._id}`,
+        method: "put",
+        headers: {
+          Authorization: user.token,
+        },
+      });
+      console.log(sendResponse);
+    } catch ({response}) {
+      console.log(response);
+    }
+  }
   return (
     <Box className={classes.masonryBox} alignContent="center">
       <Masonry columns={3} spacing={3}>
@@ -47,6 +62,7 @@ function AdmMasonryMessages({ messages }) {
               <IconButton
                 disableRipple={true}
                 className={`${classes.iconButton} ${classes.iconButtonClear}`}
+                onClick={() => handleReprove(message)}
               >
                 <ClearIcon />
               </IconButton>

@@ -6,7 +6,6 @@ import { useUserContext } from "../contexts/userContext";
 function LoginHeader({ setLoginOpen }) {
   const { user,setToken } = useUserContext();
 
-  console.log(user);
   if (user.name)
     return (
       <div onClick={() => setToken(undefined)}>

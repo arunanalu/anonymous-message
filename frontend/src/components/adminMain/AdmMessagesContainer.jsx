@@ -14,10 +14,14 @@ export default function BasicMasonry() {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const { data: fetched } = await axios.get(
-        "https://a347rl.deta.dev/messages/approve"
-      );
-      setMessages(fetched);
+      try {
+        const { data: fetched } = await axios.get(
+          "https://a347rl.deta.dev/messages/approve"
+        );
+        setMessages(fetched);
+      } catch (err) {
+        setMessages([]);
+      }
     };
     fetchMessages();
   }, []);
