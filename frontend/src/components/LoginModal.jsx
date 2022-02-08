@@ -63,7 +63,7 @@ function LoginModal({ open, onClose }) {
       <Typography variant="h2">LogoApp</Typography>
       <Box component="form" sx={{ display: "flex", flexDirection: "column" }}>
         <TextField
-          label="username"
+          label="Nome"
           variant="outlined"
           sx={{ width: 300 }}
           value={username}
