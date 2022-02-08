@@ -4,11 +4,16 @@ import React from "react";
 import { useUserContext } from "../contexts/userContext";
 
 function LoginHeader({ setLoginOpen }) {
-  const { user,setToken } = useUserContext();
+  const { user, setUser } = useUserContext();
+
+  const handleLogOut = () => {
+    sessionStorage.removeItem("user");
+    setUser({});
+  };
 
   if (user.name)
     return (
-      <div onClick={() => setToken(undefined)}>
+      <div onClick={handleLogOut}>
         <Typography variant="h6" sx={{ color: "black" }}>
           {user.name}
         </Typography>

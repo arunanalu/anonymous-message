@@ -28,8 +28,8 @@ function LoginModal({ open, onClose }) {
         },
       });
       setIsLoading(false);
-      setTimeout(onClose,1000)
-    } catch({response}) {
+      setTimeout(onClose, 1000);
+    } catch ({ response }) {
       setIsLoading(false);
       setMessage(response.data.message);
     }
@@ -46,11 +46,13 @@ function LoginModal({ open, onClose }) {
           password,
         },
       });
-      const {token, type} = loginResponse.data;
-      setUser({token, type, name: username });
+      const { token, type } = loginResponse.data;
+      const userData = { token, type, name: username };
+      setUser(userData);
+      sessionStorage. setItem("user", JSON.stringify(userData));
       setIsLoading(false);
       onClose();
-    } catch ({response}) {
+    } catch ({ response }) {
       setIsLoading(false);
       setMessage(response.data.message);
     }
@@ -87,7 +89,7 @@ function LoginModal({ open, onClose }) {
           </Button>
         </Box>
       </Box>
-      <RequestMessage message={message} loading={isLoading}/>
+      <RequestMessage message={message} loading={isLoading} />
     </CenteredModal>
   );
 }
