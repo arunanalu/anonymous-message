@@ -20,7 +20,8 @@ const messageCreate = async (req, res, next) => {
 
 const getAllApproved = async (req, res, next) => {
   try {
-    const messages = await getApprovedMessages();
+    const { n } = req.query;
+    const messages = await getApprovedMessages(n);
     res.status(success).json(messages);
   } catch (error) {
     next(error);

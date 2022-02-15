@@ -17,6 +17,14 @@ const findApprovedMessages = async () => {
   return messages;
 };
 
+const findApprovedMessagesWithPagination = async (skip) => {
+  const db = await connect();
+  const messages = await db.collection(DB_COLLECTION).find({ approved: 'true' }).sort({ _id: -1 }).skip(skip)
+    .limit(15)
+    .toArray();
+  return messages;
+};
+
 const findNotApprovedMessages = async () => {
   const db = await connect();
   const messages = await db.collection(DB_COLLECTION).find({ approved: 'false' }).toArray();
@@ -44,4 +52,5 @@ module.exports = {
   findNotApprovedMessages,
   update,
   deleteMessage,
+  findApprovedMessagesWithPagination,
 };
