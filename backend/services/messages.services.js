@@ -4,6 +4,7 @@ const {
   findNotApprovedMessages,
   update,
   deleteMessage,
+  findApprovedMessagesWithPagination,
 } = require('../models/messages.model');
 const { messageValidation, messagesEmpty } = require('../utils/functions/Validations');
 
@@ -15,7 +16,14 @@ const createMessage = async (anonymousMessage) => {
   return id;
 };
 
-const getApprovedMessages = async () => {
+const getApprovedMessages = async (n) => {
+  if (n) {
+    const numberPerPage = 15;
+    const messages = await findApprovedMessagesWithPagination(numberPerPage * n);
+    const moreMessages = (messages.length === 15);
+
+    return { messages, nextPage: moreMessages };
+  }
   const messages = await findApprovedMessages();
   messagesEmpty(messages);
   return messages;
