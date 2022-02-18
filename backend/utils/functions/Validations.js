@@ -73,6 +73,14 @@ const getPrivateMessagesValidation = (routeName, tokenName) => {
   if (routeName !== tokenName) throw errHandle(status.unauthorized, errMsg.notCorrectUser);
 };
 
+const messageExistValidation = () => {
+  throw errHandle(status.notFound, errMsg.messageNotFound);
+};
+
+const idValidation = () => {
+  throw errHandle(status.notFound, errMsg.idNotValid);
+};
+
 module.exports = {
   messageValidation,
   messageOk,
@@ -84,4 +92,6 @@ module.exports = {
   messagesEmpty,
   onlyAdminValidations,
   getPrivateMessagesValidation,
+  messageExistValidation,
+  idValidation,
 };

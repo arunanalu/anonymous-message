@@ -46,6 +46,12 @@ const deleteMessage = async (id) => {
   await db.collection(DB_COLLECTION).deleteOne({ _id: ObjectId(id) });
 };
 
+const getMessageById = async (id) => {
+  const db = await connect();
+  const message = await db.collection(DB_COLLECTION).findOne({ _id: ObjectId(id) });
+  return message;
+};
+
 module.exports = {
   create,
   findApprovedMessages,
@@ -53,4 +59,5 @@ module.exports = {
   update,
   deleteMessage,
   findApprovedMessagesWithPagination,
+  getMessageById,
 };

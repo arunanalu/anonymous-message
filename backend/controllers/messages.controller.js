@@ -5,7 +5,7 @@ const {
   updateMessage,
   removeMessage,
 } = require('../services/messages.services');
-const { messageSent, approvedMessage, messageDeleted } = require('../utils/dictionary/messagesDefault');
+const { messageSent, approvedMessage, messageDeleted } = require('../utils/dictionary/messagesDefaultPt');
 const { created, success } = require('../utils/dictionary/statusCode');
 
 const messageCreate = async (req, res, next) => {

@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const {
   create,
   findApprovedMessages,
@@ -5,8 +6,11 @@ const {
   update,
   deleteMessage,
   findApprovedMessagesWithPagination,
+  getMessageById,
 } = require('../models/messages.model');
-const { messageValidation, messagesEmpty } = require('../utils/functions/Validations');
+const {
+  messageValidation, messagesEmpty, messageExistValidation, idValidation,
+} = require('../utils/functions/Validations');
 
 const createMessage = async (anonymousMessage) => {
   const { message } = anonymousMessage;
@@ -37,11 +41,17 @@ const getNotApproved = async () => {
 
 const updateMessage = async (id) => {
   // da pra validar se foi mesmo modificada com o retorno da mensagem
+  if (!ObjectId.isValid(id)) throw idValidation();
+  const messageExist = await getMessageById(id);
+  if (!messageExist) throw messageExistValidation();
   await update(id);
 };
 
 const removeMessage = async (id) => {
   // da pra validar se foi mesmo deletada com o retorno da mensagem
+  if (!ObjectId.isValid(id)) throw idValidation();
+  const messageExist = await getMessageById(id);
+  if (!messageExist) throw messageExistValidation();
   await deleteMessage(id);
 };
 

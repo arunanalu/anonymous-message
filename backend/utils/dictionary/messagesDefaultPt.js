@@ -16,4 +16,6 @@ module.exports = {
   onlyAdmins: 'Apenas admins',
   onlyUser: 'Essa rota suporta apenas o registro de usuários comuns',
   notCorrectUser: 'Você não pode acessar as mensagens de outros usuários',
+  idNotValid: 'ID não é válido',
+  noMessages: 'Sem mensagens',
 };

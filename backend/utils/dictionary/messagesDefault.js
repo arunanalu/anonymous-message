@@ -16,4 +16,5 @@ module.exports = {
   onlyAdmins: 'Only admins can register new admins',
   onlyUser: 'This route only supports register normal users',
   notCorrectUser: 'You cant access other users privates messages',
+  idNotValid: 'ID is not valid',
 };
